@@ -101,9 +101,9 @@ export default function HomePage() {
   /* ── loading ── */
   if (loading) return (
     <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 0 80px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: 500, gap: 1, background: '#F0F0F0', marginBottom: 1 }}>
+      <div className="hairline-grid" style={{ gridTemplateColumns: '1fr 1fr', height: 500, marginBottom: 1 }}>
         <Sk style={{ height: '100%' }} />
-        <div style={{ background: '#F2F2F2', padding: 48, display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div style={{ background: 'var(--color-bg)', padding: 48, display: 'flex', flexDirection: 'column', gap: 20 }}>
           <Sk style={{ height: 10, width: 100 }} />
           <Sk style={{ height: 40, width: '80%' }} />
           <Sk style={{ height: 40, width: '60%' }} />
@@ -111,9 +111,9 @@ export default function HomePage() {
           <Sk style={{ height: 44, width: 160, marginTop: 'auto' }} />
         </div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 1, background: '#F0F0F0', margin: '0' }}>
+      <div className="hairline-grid" style={{ gridTemplateColumns: 'repeat(4,1fr)', margin: '0' }}>
         {[...Array(4)].map((_, i) => (
-          <div key={i} style={{ background: '#F2F2F2', padding: 14 }}>
+          <div key={i} className="product-tile">
             <Sk style={{ aspectRatio: '3/4' }} />
             <Sk style={{ height: 10, width: '60%', marginTop: 10 }} />
             <Sk style={{ height: 10, width: '30%', marginTop: 6 }} />
@@ -147,7 +147,7 @@ export default function HomePage() {
           HERO — 50/50 editorial split
       ══════════════════════════════════════ */}
       <section style={{ maxWidth: 1440, margin: '0 auto' }}>
-        <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#F0F0F0', height: 520 }}>
+        <div className="hero-grid hairline-grid" style={{ gridTemplateColumns: '1fr 1fr', height: 520 }}>
 
           {/* Image side */}
           <Link href={`/product/${hero._id}`} style={{ display: 'block', overflow: 'hidden', background: '#EBEBEB', textDecoration: 'none', position: 'relative' }}>
@@ -161,7 +161,7 @@ export default function HomePage() {
                 className="hero-img"
               />
             ) : (
-              <div style={{ position: 'absolute', inset: 0, background: '#EBEBEB' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'var(--color-placeholder)' }} />
             )}
             {/* Sale badge */}
             {hero.sale > 0 && (
@@ -172,7 +172,7 @@ export default function HomePage() {
           </Link>
 
           {/* Info side */}
-          <div style={{ background: '#F2F2F2', padding: '44px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box', height: '100%' }}>
+          <div style={{ background: 'var(--color-bg)', padding: '44px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box', height: '100%' }}>
             {/* Top */}
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#6B6B6B', margin: '0 0 24px' }}>
@@ -271,9 +271,9 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 1, background: '#F0F0F0' }}>
+          <div className="hairline-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))' }}>
             {gridProducts.map(p => (
-              <div key={p._id} style={{ background: '#F2F2F2', padding: 14 }}>
+              <div key={p._id} className="product-tile">
                 <ProductCard product={p} />
               </div>
             ))}
@@ -303,9 +303,9 @@ export default function HomePage() {
       {/* ══════════════════════════════════════
           FOOTER
       ══════════════════════════════════════ */}
-      <footer style={{ borderTop: '1px solid #DEDEDE', padding: '28px 32px' }}>
-        <div style={{ maxWidth: 1440, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-          <img src="/footerlogo.svg" alt="Glory" style={{ height: 20 }} />
+      <footer style={{ borderTop: '1px solid #DEDEDE', padding: '40px 32px 36px' }}>
+        <div style={{ maxWidth: 1440, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+          <img src="/footerlogo.svg" alt="Glory" className="footer-logo" style={{ height: 88, width: 'auto', display: 'block' }} />
           <p style={{ fontSize: 11, color: '#6B6B6B', margin: 0 }}>© 2025 Glory. All rights reserved.</p>
         </div>
       </footer>
@@ -317,6 +317,7 @@ export default function HomePage() {
         .cc:hover .cc-btn             { background: rgba(255,255,255,0.18) !important; border-color: #fff !important; }
         .see-all-btn:hover            { background: #0A4DCC !important; }
         @media (max-width: 768px) {
+          .footer-logo { height: 64px !important; }
           .hero-grid { grid-template-columns: 1fr !important; height: auto !important; }
           .hero-grid > a { height: 340px !important; position: relative; }
           .col3-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
