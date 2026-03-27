@@ -154,84 +154,80 @@ export default function HomePage() {
     <div>
 
       {/* ══════════════════════════════════════
-          HERO — 50/50 editorial split
+          FULL-WIDTH HERO — brand introduction
       ══════════════════════════════════════ */}
-      <section style={{ maxWidth: 1440, margin: '0 auto' }}>
-        <div className="hero-grid hairline-grid" style={{ gridTemplateColumns: '1fr 1fr', height: 520 }}>
+      <section style={{ position: 'relative', width: '100vw', height: 'clamp(400px, 70vh, 700px)', overflow: 'hidden', marginLeft: 'calc(-50vw + 50%)' }}>
+        {/* Background image */}
+        {hero.images?.[0] ? (
+          <Image
+            src={hero.images[0]}
+            alt="Glory"
+            fill priority
+            sizes="100vw"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            className="hero-bg-img"
+          />
+        ) : (
+          <div style={{ position: 'absolute', inset: 0, background: '#EBEBEB' }} />
+        )}
 
-          {/* Image side */}
-          <Link href={`/product/${hero._id}`} style={{ display: 'block', overflow: 'hidden', background: '#EBEBEB', textDecoration: 'none', position: 'relative' }}>
-            {hero.images?.[0] ? (
-              <Image
-                src={hero.images[0]}
-                alt={hero.name}
-                fill priority
-                sizes="(max-width:768px) 100vw, 50vw"
-                style={{ objectFit: 'cover', transition: 'transform .7s cubic-bezier(.4,0,.2,1)' }}
-                className="hero-img"
-              />
-            ) : (
-              <div style={{ position: 'absolute', inset: 0, background: 'var(--color-placeholder)' }} />
-            )}
-            {/* Sale badge */}
-            {hero.sale > 0 && (
-              <span style={{ position: 'absolute', top: 16, left: 16, background: '#0A4DCC', color: '#fff', fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '4px 9px', fontWeight: 700 }}>
-                Sale
-              </span>
-            )}
+        {/* Dark overlay */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%)',
+        }} />
+
+        {/* Content overlay */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          textAlign: 'center', color: '#fff', padding: '40px 20px'
+        }}>
+          <h1 style={{
+            fontSize: 'clamp(48px, 8vw, 80px)',
+            fontWeight: 900, letterSpacing: '-0.03em',
+            margin: '0 0 16px', lineHeight: 1.0
+          }}>
+            GLORY
+          </h1>
+          <p style={{
+            fontSize: 'clamp(14px, 2.5vw, 20px)',
+            fontWeight: 300, letterSpacing: '0.15em',
+            textTransform: 'uppercase', margin: '0 0 32px',
+            maxWidth: 600, lineHeight: 1.6
+          }}>
+            Curated Fashion for the Discerning Taste
+          </p>
+          <Link
+            href="/shop"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 10,
+              fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
+              fontWeight: 700, textDecoration: 'none',
+              color: '#fff', background: 'rgba(255,255,255,0.15)',
+              padding: '14px 32px', backdropFilter: 'blur(4px)',
+              border: '1px solid rgba(255,255,255,0.3)',
+              transition: 'all 0.3s ease',
+            }}
+            className="hero-cta"
+          >
+            Explore Collection
+            <span>→</span>
           </Link>
-
-          {/* Info side */}
-          <div className="hero-copy" style={{ background: 'var(--color-bg)', padding: '44px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box', height: '100%' }}>
-            {/* Top */}
-            <div>
-              <p style={{ fontSize: 10, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#6B6B6B', margin: '0 0 24px' }}>
-                SS25{hero.collection ? ` · ${hero.collection}` : ''}
-              </p>
-              <h1 style={{ fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.025em', margin: '0 0 16px' }}>
-                {hero.name}
-              </h1>
-              {hero.description && (
-                <p style={{ fontSize: 12, color: '#6B6B6B', lineHeight: 1.7, maxWidth: 300, margin: '0 0 20px' }}>
-                  {hero.description.length > 110 ? hero.description.slice(0, 110) + '…' : hero.description}
-                </p>
-              )}
-              <p style={{ fontSize: 20, fontWeight: 700, letterSpacing: '-0.01em', margin: 0 }}>
-                {hero.sale > 0
-                  ? <><span style={{ color: '#0A4DCC' }}>${hero.sale}</span>&nbsp;<span style={{ fontSize: 13, color: '#999', textDecoration: 'line-through', fontWeight: 400 }}>${hero.price}</span></>
-                  : `$${hero.price}`}
-              </p>
-            </div>
-
-            {/* Bottom */}
-            <div>
-              {hero.variations?.length > 0 && (
-                <div style={{ display: 'flex', gap: 7, marginBottom: 22, flexWrap: 'wrap' }}>
-                  {hero.variations.slice(0, 8).map(v => (
-                    <span key={v.color} title={v.name} style={{ width: 16, height: 16, borderRadius: '50%', background: v.color, border: '1.5px solid rgba(0,0,0,0.12)', flexShrink: 0 }} />
-                  ))}
-                  {hero.variations.length > 8 && <span style={{ fontSize: 10, color: '#6B6B6B', alignSelf: 'center' }}>+{hero.variations.length - 8}</span>}
-                </div>
-              )}
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                <Link
-                  href={`/product/${hero._id}`}
-                  className="btn-primary"
-                  style={{ textDecoration: 'none' }}
-                >
-                  View Product
-                </Link>
-                <Link
-                  href={hero.collection ? `/shop?collection=${encodeURIComponent(hero.collection)}` : '/shop'}
-                  className="btn-outline"
-                  style={{ textDecoration: 'none' }}
-                >
-                  {hero.collection ? `Shop ${hero.collection}` : 'See All Products'}
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
+
+        <style>{`
+          .hero-cta:hover {
+            background: rgba(255,255,255,0.25) !important;
+            border-color: rgba(255,255,255,0.5) !important;
+          }
+          @media (max-width: 768px) {
+            .hero-cta {
+              padding: 12px 24px !important;
+              font-size: 10px !important;
+            }
+          }
+        `}</style>
       </section>
 
       {/* ══════════════════════════════════════
@@ -267,109 +263,7 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* ══════════════════════════════════════
-          BRAND VALUES — trust & credibility
-      ══════════════════════════════════════ */}
-      <section className="home-values" style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 32px', background: '#fff' }}>
-        <h2 style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#6B6B6B', marginBottom: 48, textAlign: 'center' }}>
-          Why Choose Glory
-        </h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 32 }}>
-          {[
-            { icon: '✓', title: 'Premium Quality', desc: 'Curated fabrics and timeless designs for discerning tastes' },
-            { icon: '◆', title: 'Exclusive Collections', desc: 'Limited editions that celebrate individuality and boldness' },
-            { icon: '→', title: 'Fast Delivery', desc: 'Global shipping with real-time tracking on every order' },
-            { icon: '❤', title: 'Lifetime Support', desc: 'Expert styling advice and seamless returns guarantee' },
-          ].map((item, i) => (
-            <div key={i} style={{ textAlign: 'center', padding: '20px 0', transition: 'transform .3s' }} className="value-card">
-              <div style={{ fontSize: 32, marginBottom: 16, opacity: 0.8 }}>{item.icon}</div>
-              <h3 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', margin: '0 0 10px', textTransform: 'uppercase' }}>
-                {item.title}
-              </h3>
-              <p style={{ fontSize: 11, color: '#6B6B6B', lineHeight: 1.6, margin: 0 }}>
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      {/* ══════════════════════════════════════
-          LIFESTYLE/EDITORIAL — storytelling
-      ══════════════════════════════════════ */}
-      <section style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 32px' }}>
-        <div className="lifestyle-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center' }}>
-          {/* Left: Copy */}
-          <div>
-            <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#0A4DCC', marginBottom: 16, fontWeight: 600 }}>
-              The Story Behind Glory
-            </p>
-            <h2 style={{ fontSize: 'clamp(24px, 4vw, 42px)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.02em', margin: '0 0 24px' }}>
-              Designed for Those Who Dare
-            </h2>
-            <p style={{ fontSize: 12, color: '#6B6B6B', lineHeight: 1.8, margin: '0 0 20px', maxWidth: 420 }}>
-              Every piece in our collection tells a story of bold choices and timeless elegance. We believe fashion should empower, inspire, and make a statement. From emerging designers to established artisans, we partner with visionaries who understand that true style transcends trends.
-            </p>
-            <Link
-              href="/shop"
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase',
-                fontWeight: 600, textDecoration: 'none',
-                color: '#000', borderBottom: '2px solid #000',
-                paddingBottom: 2, transition: 'opacity .2s',
-              }}
-              className="lifestyle-link"
-            >
-              Explore the Collection
-              <span>→</span>
-            </Link>
-          </div>
-          
-          {/* Right: Placeholder image/visual */}
-          <div className="lifestyle-image" style={{
-            background: 'linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%)',
-            aspectRatio: '1 / 1.2',
-            borderRadius: 2,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 12, color: '#999', textAlign: 'center', padding: 20
-          }}>
-            Featured Lifestyle Image
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════
-          LIMITED EDITION BANNER
-      ══════════════════════════════════════ */}
-      <section className="limited-section" style={{ maxWidth: 1440, margin: '0 auto', padding: '32px', background: '#0A4DCC', color: '#fff', borderRadius: 1, marginBottom: '64px', marginLeft: '32px', marginRight: '32px' }}>
-        <div className="limited-banner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20 }}>
-          <div>
-            <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', margin: '0 0 8px', opacity: 0.9 }}>
-              Exclusive Drop
-            </p>
-            <h3 style={{ fontSize: 'clamp(18px, 3vw, 28px)', fontWeight: 700, lineHeight: 1.2, margin: 0 }}>
-              SS25 Limited Edition Capsule
-            </h3>
-            <p style={{ fontSize: 10, margin: '8px 0 0', opacity: 0.85 }}>
-              Only 3 items left in stock
-            </p>
-          </div>
-          <Link
-            href="/shop"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase',
-              fontWeight: 600, textDecoration: 'none',
-              color: '#0A4DCC', background: '#fff',
-              padding: '12px 28px', transition: 'transform .2s',
-            }}
-            className="limited-btn"
-          >
-            Shop Now
-          </Link>
-        </div>
-      </section>
 
       {/* ══════════════════════════════════════
           PRODUCTS GRID — with "See All" CTA
@@ -431,48 +325,7 @@ export default function HomePage() {
         .cc:hover .cc-btn             { background: rgba(255,255,255,0.18) !important; border-color: #fff !important; }
         .see-all-btn:hover            { background: #0A4DCC !important; }
         
-        /* Brand values cards — subtle lift effect */
-        .value-card {
-          cursor: default;
-        }
-        .value-card:hover {
-          transform: translateY(-8px) !important;
-        }
-        
-        /* Lifestyle link underline animation */
-        .lifestyle-link {
-          position: relative;
-          transition: color .2s !important;
-        }
-        .lifestyle-link:hover {
-          color: #0A4DCC !important;
-          border-color: #0A4DCC !important;
-        }
-        
-        /* Limited edition button pulse effect */
-        .limited-btn {
-          transition: all .2s cubic-bezier(.4,0,.2,1) !important;
-        }
-        .limited-btn:hover {
-          transform: scale(1.05) !important;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-        }
-        
-        /* Smooth page load fade-in */
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(16px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .home-section {
-          animation: fadeInUp 0.6s cubic-bezier(.4,0,.2,1) forwards;
-        }
+
         @media (max-width: 768px) {
           .footer-logo { height: 64px !important; }
           .home-section { padding-left: 16px !important; padding-right: 16px !important; }
@@ -498,50 +351,6 @@ export default function HomePage() {
           .home-footer-inner { flex-direction: column !important; align-items: flex-start !important; }
           .home-product-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-          }
-          
-          /* Values section — responsive grid */
-          .home-values {
-            padding: 40px 16px !important;
-          }
-          
-          .home-values > div {
-            grid-template-columns: 1fr 1fr !important;
-            gap: 20px !important;
-          }
-          
-          /* Lifestyle section — stacked layout on mobile */
-          .lifestyle-grid {
-            grid-template-columns: 1fr !important;
-            gap: 24px !important;
-          }
-          
-          .lifestyle-image {
-            aspect-ratio: 1 !important;
-            min-height: 280px !important;
-          }
-          
-          /* Limited edition banner — full width responsive */
-          .limited-section {
-            padding: 24px 16px !important;
-            margin-left: 16px !important;
-            margin-right: 16px !important;
-            margin-bottom: 48px !important;
-          }
-          
-          .limited-banner {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 16px !important;
-          }
-          
-          .limited-banner > div:first-child {
-            width: 100% !important;
-          }
-          
-          .limited-btn {
-            width: 100% !important;
-            justify-content: center !important;
           }
         }
       `}</style>
