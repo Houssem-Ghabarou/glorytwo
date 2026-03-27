@@ -69,6 +69,27 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Readable placeholders; avoid iOS zoom on focus (needs ≥16px on small screens). */
+input::placeholder,
+textarea::placeholder {
+  color: #8a8a8a;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  input[type='text'],
+  input[type='email'],
+  input[type='tel'],
+  input[type='search'],
+  input[type='password'],
+  input[type='number'],
+  input:not([type]),
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+
 /* Noise texture */
 body::after {
   content: '';
@@ -118,15 +139,22 @@ body::after {
 
   .input-base {
     width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     border: 1px solid #DEDEDE;
     background: #fff;
     padding: 12px 16px;
-    font-size: 13px;
     font-family: 'BeatriceDeck', sans-serif;
     outline: none;
     transition: border-color 0.2s;
   }
   .input-base:focus { border-color: #000; }
+
+  @media (min-width: 769px) {
+    .input-base {
+      font-size: 13px;
+    }
+  }
 
   .label-xs {
     font-size: 10px;
@@ -148,5 +176,14 @@ body::after {
   .product-tile {
     background: var(--color-bg);
     padding: 14px;
+  }
+
+  @media (min-width: 769px) {
+    .shop-search-input {
+      font-size: 14px;
+    }
+    .newsletter-email-input {
+      font-size: 13px;
+    }
   }
 }

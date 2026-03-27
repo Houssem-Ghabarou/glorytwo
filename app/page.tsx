@@ -21,8 +21,8 @@ function groupCollections(products: Product[]) {
 /* ─────────────────────────────────────────────
    Skeleton card
 ───────────────────────────────────────────── */
-function Sk({ style }: { style?: React.CSSProperties }) {
-  return <div className="sk" style={{ background: '#E8E8E8', ...style }} />
+function Sk({ style, className }: { style?: React.CSSProperties; className?: string }) {
+  return <div className={`sk ${className ?? ''}`} style={{ background: '#E8E8E8', ...style }} />
 }
 
 /* ─────────────────────────────────────────────
@@ -41,7 +41,7 @@ function CollectionCard({ name, image, count }: { name: string; image: string; c
           src={image}
           alt={name}
           fill
-          sizes="33vw"
+          sizes="(max-width: 768px) 100vw, 33vw"
           style={{ objectFit: 'cover', transition: 'transform .65s cubic-bezier(.4,0,.2,1)', opacity: 0.88 }}
           className="cc-img"
         />
@@ -100,10 +100,10 @@ export default function HomePage() {
 
   /* ── loading ── */
   if (loading) return (
-    <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 0 80px' }}>
-      <div className="hairline-grid" style={{ gridTemplateColumns: '1fr 1fr', height: 500, marginBottom: 1 }}>
-        <Sk style={{ height: '100%' }} />
-        <div style={{ background: 'var(--color-bg)', padding: 48, display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <div className="home-loading" style={{ maxWidth: 1440, margin: '0 auto', padding: '0 0 80px' }}>
+      <div className="hairline-grid home-skeleton-hero" style={{ gridTemplateColumns: '1fr 1fr', height: 500, marginBottom: 1 }}>
+        <Sk className="home-skeleton-hero-img" style={{ height: '100%', minHeight: 280 }} />
+        <div className="home-skeleton-hero-copy" style={{ background: 'var(--color-bg)', padding: 48, display: 'flex', flexDirection: 'column', gap: 20 }}>
           <Sk style={{ height: 10, width: 100 }} />
           <Sk style={{ height: 40, width: '80%' }} />
           <Sk style={{ height: 40, width: '60%' }} />
@@ -111,7 +111,7 @@ export default function HomePage() {
           <Sk style={{ height: 44, width: 160, marginTop: 'auto' }} />
         </div>
       </div>
-      <div className="hairline-grid" style={{ gridTemplateColumns: 'repeat(4,1fr)', margin: '0' }}>
+      <div className="hairline-grid home-skeleton-products" style={{ gridTemplateColumns: 'repeat(4,1fr)', margin: '0' }}>
         {[...Array(4)].map((_, i) => (
           <div key={i} className="product-tile">
             <Sk style={{ aspectRatio: '3/4' }} />
@@ -120,13 +120,23 @@ export default function HomePage() {
           </div>
         ))}
       </div>
-      <style>{`.sk{animation:sk 1.5s ease-in-out infinite}@keyframes sk{0%,100%{opacity:1}50%{opacity:.4}}`}</style>
+      <style>{`
+        .sk{animation:sk 1.5s ease-in-out infinite}
+        @keyframes sk{0%,100%{opacity:1}50%{opacity:.4}}
+        @media (max-width: 768px) {
+          .home-loading { padding: 0 0 48px !important; }
+          .home-skeleton-hero { grid-template-columns: 1fr !important; height: auto !important; margin-bottom: 8px !important; }
+          .home-skeleton-hero-img { min-height: min(72vw, 380px) !important; height: 72vw !important; }
+          .home-skeleton-hero-copy { padding: 24px 20px 28px !important; min-height: 0 !important; }
+          .home-skeleton-products { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+      `}</style>
     </div>
   )
 
   /* ── empty ── */
   if (products.length === 0) return (
-    <div style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 20, padding: 40 }}>
+    <div style={{ minHeight: '60vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 20, padding: '40px 20px' }}>
       <img src="/logo.svg" alt="Glory" style={{ height: 32, opacity: 0.18 }} />
       <p style={{ fontSize: 11, letterSpacing: '0.24em', textTransform: 'uppercase', color: '#6B6B6B', margin: 0 }}>
         New collection coming soon
@@ -172,7 +182,7 @@ export default function HomePage() {
           </Link>
 
           {/* Info side */}
-          <div style={{ background: 'var(--color-bg)', padding: '44px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box', height: '100%' }}>
+          <div className="hero-copy" style={{ background: 'var(--color-bg)', padding: '44px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box', height: '100%' }}>
             {/* Top */}
             <div>
               <p style={{ fontSize: 10, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#6B6B6B', margin: '0 0 24px' }}>
@@ -228,7 +238,7 @@ export default function HomePage() {
           COLLECTIONS — editorial grid with CTA per card
       ══════════════════════════════════════ */}
       {hasCollections && (
-        <section style={{ maxWidth: 1440, margin: '0 auto', padding: '56px 32px' }}>
+        <section className="home-section" style={{ maxWidth: 1440, margin: '0 auto', padding: '56px 32px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 22 }}>
             <h2 style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', margin: 0 }}>Collections</h2>
             <Link href="/shop" style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B6B6B', textDecoration: 'none', borderBottom: '1px solid #BABABA', paddingBottom: 1 }}>
@@ -238,7 +248,7 @@ export default function HomePage() {
 
           {/* Asymmetric editorial layout */}
           {collections.length === 2 && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, height: 420 }}>
+            <div className="home-collections-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, height: 420 }}>
               {collections.map(c => <CollectionCard key={c.name} {...c} />)}
             </div>
           )}
@@ -250,7 +260,7 @@ export default function HomePage() {
             </div>
           )}
           {collections.length >= 4 && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, height: 400 }}>
+            <div className="home-collections-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 8, height: 400 }}>
               {collections.slice(0, 4).map(c => <CollectionCard key={c.name} {...c} />)}
             </div>
           )}
@@ -261,7 +271,7 @@ export default function HomePage() {
           PRODUCTS GRID — with "See All" CTA
       ══════════════════════════════════════ */}
       {gridProducts.length > 0 && (
-        <section style={{ maxWidth: 1440, margin: '0 auto', padding: `${hasCollections ? '0' : '48px'} 32px 80px` }}>
+        <section className="home-section home-section-products" style={{ maxWidth: 1440, margin: '0 auto', padding: `${hasCollections ? '0' : '48px'} 32px 80px` }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 22 }}>
             <h2 style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.22em', textTransform: 'uppercase', margin: 0 }}>
               New Arrivals
@@ -271,7 +281,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="hairline-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))' }}>
+          <div className="hairline-grid home-product-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))' }}>
             {gridProducts.map(p => (
               <div key={p._id} className="product-tile">
                 <ProductCard product={p} />
@@ -303,8 +313,8 @@ export default function HomePage() {
       {/* ══════════════════════════════════════
           FOOTER
       ══════════════════════════════════════ */}
-      <footer style={{ borderTop: '1px solid #DEDEDE', padding: '40px 32px 36px' }}>
-        <div style={{ maxWidth: 1440, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+      <footer className="home-footer" style={{ borderTop: '1px solid #DEDEDE', padding: '40px 32px 36px' }}>
+        <div className="home-footer-inner" style={{ maxWidth: 1440, margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
           <img src="/footerlogo.svg" alt="Glory" className="footer-logo" style={{ height: 88, width: 'auto', display: 'block' }} />
           <p style={{ fontSize: 11, color: '#6B6B6B', margin: 0 }}>© 2025 Glory. All rights reserved.</p>
         </div>
@@ -318,10 +328,30 @@ export default function HomePage() {
         .see-all-btn:hover            { background: #0A4DCC !important; }
         @media (max-width: 768px) {
           .footer-logo { height: 64px !important; }
+          .home-section { padding-left: 16px !important; padding-right: 16px !important; }
+          .home-section-products { padding-bottom: 56px !important; }
+          .hero-copy { padding: 28px 20px 32px !important; }
           .hero-grid { grid-template-columns: 1fr !important; height: auto !important; }
-          .hero-grid > a { height: 340px !important; position: relative; }
+          .hero-grid > a { height: min(88vw, 420px) !important; min-height: 280px !important; position: relative; }
+          .home-collections-2 {
+            grid-template-columns: 1fr !important;
+            height: auto !important;
+          }
+          .home-collections-2 .cc { min-height: 220px !important; aspect-ratio: 4/5; }
+          .home-collections-4 {
+            grid-template-columns: repeat(2, 1fr) !important;
+            height: auto !important;
+            gap: 6px !important;
+          }
+          .home-collections-4 .cc { min-height: 180px !important; }
           .col3-grid { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
           .col3-grid > div:first-child { grid-row: auto !important; }
+          .col3-grid .cc { min-height: 200px !important; }
+          .home-footer { padding: 32px 16px 28px !important; }
+          .home-footer-inner { flex-direction: column !important; align-items: flex-start !important; }
+          .home-product-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
         }
       `}</style>
     </div>

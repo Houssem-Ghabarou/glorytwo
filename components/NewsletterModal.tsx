@@ -191,13 +191,18 @@ export default function NewsletterModal() {
                   <input
                     type="email"
                     required
-                    placeholder="your@email.com"
+                    inputMode="email"
+                    autoComplete="email"
+                    placeholder="Email address"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
+                    className="newsletter-email-input"
                     style={{
-                      width: '100%', border: '1px solid #DEDEDE',
+                      width: '100%',
+                      minWidth: 0,
+                      border: '1px solid #DEDEDE',
                       background: '#fff', padding: '13px 16px',
-                      fontSize: 13, fontFamily: 'inherit',
+                      fontFamily: 'inherit',
                       outline: 'none', transition: 'border-color 0.2s',
                       boxSizing: 'border-box',
                     }}

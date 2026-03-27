@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ShoppingBag } from 'lucide-react'
@@ -16,6 +16,10 @@ export default function ProductDetails({ product }: { product: Product }) {
   const [qty, setQty] = useState(1)
   const [added, setAdded] = useState(false)
 
+  const swipeRef = useRef<{ x: number } | null>(null)
+  const images = product.images ?? []
+  const imageCount = images.length
+
   const variation = product.variations?.find(v => v.color === selectedColor)
   const sizes = variation ? Object.entries(variation.sizes) : []
   const price = product.sale > 0 ? product.sale : product.price
@@ -23,6 +27,31 @@ export default function ProductDetails({ product }: { product: Product }) {
   const sizeStock = (size: string) => {
     if (!variation) return 0
     return variation.sizes[size] ?? 0
+  }
+
+  const SWIPE_PX = 48
+
+  const onGalleryPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (imageCount <= 1) return
+    swipeRef.current = { x: e.clientX }
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+
+  const onGalleryPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!swipeRef.current || imageCount <= 1) return
+    const dx = swipeRef.current.x - e.clientX
+    if (dx > SWIPE_PX) setActiveImg(i => Math.min(imageCount - 1, i + 1))
+    else if (dx < -SWIPE_PX) setActiveImg(i => Math.max(0, i - 1))
+    swipeRef.current = null
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId)
+    } catch {
+      /* already released */
+    }
+  }
+
+  const onGalleryPointerCancel = () => {
+    swipeRef.current = null
   }
 
   const handleAddToCart = () => {
@@ -54,13 +83,30 @@ export default function ProductDetails({ product }: { product: Product }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 40 }} className="product-layout">
         {/* ── Images ── */}
         <div>
-          {/* Main image */}
-          <div style={{ position: 'relative', aspectRatio: '3/4', background: '#EBEBEB', overflow: 'hidden', marginBottom: 8 }}>
+          {/* Main image — swipe / drag horizontally to change photo */}
+          <div
+            role={imageCount > 1 ? 'region' : undefined}
+            aria-label={imageCount > 1 ? `Photos ${activeImg + 1} of ${imageCount}. Swipe or drag sideways to change.` : undefined}
+            onPointerDown={onGalleryPointerDown}
+            onPointerUp={onGalleryPointerUp}
+            onPointerCancel={onGalleryPointerCancel}
+            style={{
+              position: 'relative',
+              aspectRatio: '3/4',
+              background: '#EBEBEB',
+              overflow: 'hidden',
+              marginBottom: 8,
+              cursor: imageCount > 1 ? 'grab' : 'default',
+              touchAction: imageCount > 1 ? 'pan-y' : 'auto',
+            }}
+            className="product-gallery-main"
+          >
             {product.images?.[activeImg] ? (
               <Image
                 src={product.images[activeImg]}
-                alt={product.name}
+                alt={imageCount > 1 ? `${product.name} — ${activeImg + 1} of ${imageCount}` : product.name}
                 fill
+                draggable={false}
                 priority
                 style={{ objectFit: 'cover' }}
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -236,6 +282,7 @@ export default function ProductDetails({ product }: { product: Product }) {
       </div>
 
       <style>{`
+        .product-gallery-main:active { cursor: grabbing; }
         @media (max-width: 768px) {
           .product-layout { grid-template-columns: 1fr !important; gap: 24px !important; }
         }

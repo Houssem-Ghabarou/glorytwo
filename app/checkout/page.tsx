@@ -120,7 +120,7 @@ export default function CheckoutPage() {
             <>
               <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 28 }}>Shipping Information</h2>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div className="checkout-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 {/* First name */}
                 <Field label="First Name *" error={errors.firstName as string}>
                   <input className="input-base" value={form.firstName} onChange={e => set('firstName', e.target.value)} />
@@ -139,7 +139,7 @@ export default function CheckoutPage() {
                 </Field>
                 {/* Address 1 */}
                 <Field label="Address *" error={errors.address1 as string} full>
-                  <input className="input-base" value={form.address1} onChange={e => set('address1', e.target.value)} placeholder="Street address, building" />
+                  <input className="input-base" value={form.address1} onChange={e => set('address1', e.target.value)} placeholder="Street, building, apt" />
                 </Field>
                 {/* Address 2 */}
                 <Field label="Apt / Suite (optional)" full>
@@ -285,6 +285,9 @@ export default function CheckoutPage() {
         @media (max-width: 768px) {
           .checkout-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
         }
+        @media (max-width: 640px) {
+          .checkout-form-grid { grid-template-columns: 1fr !important; }
+        }
         @media (max-width: 600px) {
           .checkout-grid > div:last-child { position: static !important; order: -1; }
         }
@@ -295,7 +298,7 @@ export default function CheckoutPage() {
 
 function Field({ label, error, children, full }: { label: string; error?: string; children: React.ReactNode; full?: boolean }) {
   return (
-    <div style={{ gridColumn: full ? '1 / -1' : 'auto' }}>
+    <div style={{ gridColumn: full ? '1 / -1' : 'auto', minWidth: 0 }}>
       <label style={{ display: 'block', fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B6B6B', marginBottom: 6 }}>
         {label}
       </label>

@@ -227,17 +227,23 @@ function ShopContent() {
               style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: '#6B6B6B', pointerEvents: 'none' }}
             />
             <input
+              className="shop-search-input"
+              type="search"
+              enterKeyHint="search"
+              autoCapitalize="sentences"
+              autoCorrect="off"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Search products…"
+              placeholder="Search products"
               style={{
                 width: '100%',
+                minWidth: 0,
+                maxWidth: '100%',
                 boxSizing: 'border-box',
                 paddingLeft: 46,
                 paddingRight: search ? 44 : 16,
                 paddingTop: 14,
                 paddingBottom: 14,
-                fontSize: 14,
                 fontFamily: 'inherit',
                 border: '1px solid #DEDEDE',
                 background: '#fff',
