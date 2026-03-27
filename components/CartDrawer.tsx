@@ -73,7 +73,7 @@ export default function CartDrawer() {
                   {/* Image */}
                   <div style={{ position: 'relative', width: 72, height: 96, flexShrink: 0, background: '#F2F2F2', overflow: 'hidden' }}>
                     {item.image ? (
-                      <Image src={item.image} alt={item.name} fill style={{ objectFit: 'cover' }} />
+                      <Image src={item.image} alt={item.name} fill style={{ objectFit: 'cover' }} sizes="72px" />
                     ) : (
                       <div style={{ width: '100%', height: '100%', background: '#DEDEDE' }} />
                     )}

@@ -268,6 +268,110 @@ export default function HomePage() {
       )}
 
       {/* ══════════════════════════════════════
+          BRAND VALUES — trust & credibility
+      ══════════════════════════════════════ */}
+      <section className="home-values" style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 32px', background: '#fff' }}>
+        <h2 style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#6B6B6B', marginBottom: 48, textAlign: 'center' }}>
+          Why Choose Glory
+        </h2>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 32 }}>
+          {[
+            { icon: '✓', title: 'Premium Quality', desc: 'Curated fabrics and timeless designs for discerning tastes' },
+            { icon: '◆', title: 'Exclusive Collections', desc: 'Limited editions that celebrate individuality and boldness' },
+            { icon: '→', title: 'Fast Delivery', desc: 'Global shipping with real-time tracking on every order' },
+            { icon: '❤', title: 'Lifetime Support', desc: 'Expert styling advice and seamless returns guarantee' },
+          ].map((item, i) => (
+            <div key={i} style={{ textAlign: 'center', padding: '20px 0', transition: 'transform .3s' }} className="value-card">
+              <div style={{ fontSize: 32, marginBottom: 16, opacity: 0.8 }}>{item.icon}</div>
+              <h3 style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.06em', margin: '0 0 10px', textTransform: 'uppercase' }}>
+                {item.title}
+              </h3>
+              <p style={{ fontSize: 11, color: '#6B6B6B', lineHeight: 1.6, margin: 0 }}>
+                {item.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          LIFESTYLE/EDITORIAL — storytelling
+      ══════════════════════════════════════ */}
+      <section style={{ maxWidth: 1440, margin: '0 auto', padding: '64px 32px' }}>
+        <div className="lifestyle-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center' }}>
+          {/* Left: Copy */}
+          <div>
+            <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#0A4DCC', marginBottom: 16, fontWeight: 600 }}>
+              The Story Behind Glory
+            </p>
+            <h2 style={{ fontSize: 'clamp(24px, 4vw, 42px)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.02em', margin: '0 0 24px' }}>
+              Designed for Those Who Dare
+            </h2>
+            <p style={{ fontSize: 12, color: '#6B6B6B', lineHeight: 1.8, margin: '0 0 20px', maxWidth: 420 }}>
+              Every piece in our collection tells a story of bold choices and timeless elegance. We believe fashion should empower, inspire, and make a statement. From emerging designers to established artisans, we partner with visionaries who understand that true style transcends trends.
+            </p>
+            <Link
+              href="/shop"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase',
+                fontWeight: 600, textDecoration: 'none',
+                color: '#000', borderBottom: '2px solid #000',
+                paddingBottom: 2, transition: 'opacity .2s',
+              }}
+              className="lifestyle-link"
+            >
+              Explore the Collection
+              <span>→</span>
+            </Link>
+          </div>
+          
+          {/* Right: Placeholder image/visual */}
+          <div className="lifestyle-image" style={{
+            background: 'linear-gradient(135deg, #f5f5f5 0%, #ebebeb 100%)',
+            aspectRatio: '1 / 1.2',
+            borderRadius: 2,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 12, color: '#999', textAlign: 'center', padding: 20
+          }}>
+            Featured Lifestyle Image
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          LIMITED EDITION BANNER
+      ══════════════════════════════════════ */}
+      <section className="limited-section" style={{ maxWidth: 1440, margin: '0 auto', padding: '32px', background: '#0A4DCC', color: '#fff', borderRadius: 1, marginBottom: '64px', marginLeft: '32px', marginRight: '32px' }}>
+        <div className="limited-banner" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 20 }}>
+          <div>
+            <p style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', margin: '0 0 8px', opacity: 0.9 }}>
+              Exclusive Drop
+            </p>
+            <h3 style={{ fontSize: 'clamp(18px, 3vw, 28px)', fontWeight: 700, lineHeight: 1.2, margin: 0 }}>
+              SS25 Limited Edition Capsule
+            </h3>
+            <p style={{ fontSize: 10, margin: '8px 0 0', opacity: 0.85 }}>
+              Only 3 items left in stock
+            </p>
+          </div>
+          <Link
+            href="/shop"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase',
+              fontWeight: 600, textDecoration: 'none',
+              color: '#0A4DCC', background: '#fff',
+              padding: '12px 28px', transition: 'transform .2s',
+            }}
+            className="limited-btn"
+          >
+            Shop Now
+          </Link>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
           PRODUCTS GRID — with "See All" CTA
       ══════════════════════════════════════ */}
       {gridProducts.length > 0 && (
@@ -326,6 +430,49 @@ export default function HomePage() {
         .cc:hover .cc-img             { transform: scale(1.06) !important; }
         .cc:hover .cc-btn             { background: rgba(255,255,255,0.18) !important; border-color: #fff !important; }
         .see-all-btn:hover            { background: #0A4DCC !important; }
+        
+        /* Brand values cards — subtle lift effect */
+        .value-card {
+          cursor: default;
+        }
+        .value-card:hover {
+          transform: translateY(-8px) !important;
+        }
+        
+        /* Lifestyle link underline animation */
+        .lifestyle-link {
+          position: relative;
+          transition: color .2s !important;
+        }
+        .lifestyle-link:hover {
+          color: #0A4DCC !important;
+          border-color: #0A4DCC !important;
+        }
+        
+        /* Limited edition button pulse effect */
+        .limited-btn {
+          transition: all .2s cubic-bezier(.4,0,.2,1) !important;
+        }
+        .limited-btn:hover {
+          transform: scale(1.05) !important;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        }
+        
+        /* Smooth page load fade-in */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(16px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .home-section {
+          animation: fadeInUp 0.6s cubic-bezier(.4,0,.2,1) forwards;
+        }
         @media (max-width: 768px) {
           .footer-logo { height: 64px !important; }
           .home-section { padding-left: 16px !important; padding-right: 16px !important; }
@@ -351,6 +498,50 @@ export default function HomePage() {
           .home-footer-inner { flex-direction: column !important; align-items: flex-start !important; }
           .home-product-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
+          
+          /* Values section — responsive grid */
+          .home-values {
+            padding: 40px 16px !important;
+          }
+          
+          .home-values > div {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 20px !important;
+          }
+          
+          /* Lifestyle section — stacked layout on mobile */
+          .lifestyle-grid {
+            grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+          
+          .lifestyle-image {
+            aspect-ratio: 1 !important;
+            min-height: 280px !important;
+          }
+          
+          /* Limited edition banner — full width responsive */
+          .limited-section {
+            padding: 24px 16px !important;
+            margin-left: 16px !important;
+            margin-right: 16px !important;
+            margin-bottom: 48px !important;
+          }
+          
+          .limited-banner {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 16px !important;
+          }
+          
+          .limited-banner > div:first-child {
+            width: 100% !important;
+          }
+          
+          .limited-btn {
+            width: 100% !important;
+            justify-content: center !important;
           }
         }
       `}</style>
