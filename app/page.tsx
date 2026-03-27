@@ -101,7 +101,7 @@ export default function HomePage() {
   /* ── loading ── */
   if (loading) return (
     <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 0 80px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: 500, gap: 1, background: '#DEDEDE', marginBottom: 1 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', height: 500, gap: 1, background: '#F0F0F0', marginBottom: 1 }}>
         <Sk style={{ height: '100%' }} />
         <div style={{ background: '#F2F2F2', padding: 48, display: 'flex', flexDirection: 'column', gap: 20 }}>
           <Sk style={{ height: 10, width: 100 }} />
@@ -111,7 +111,7 @@ export default function HomePage() {
           <Sk style={{ height: 44, width: 160, marginTop: 'auto' }} />
         </div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 1, background: '#DEDEDE', margin: '0' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 1, background: '#F0F0F0', margin: '0' }}>
         {[...Array(4)].map((_, i) => (
           <div key={i} style={{ background: '#F2F2F2', padding: 14 }}>
             <Sk style={{ aspectRatio: '3/4' }} />
@@ -147,7 +147,7 @@ export default function HomePage() {
           HERO — 50/50 editorial split
       ══════════════════════════════════════ */}
       <section style={{ maxWidth: 1440, margin: '0 auto' }}>
-        <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#DEDEDE', height: 520 }}>
+        <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 1, background: '#F0F0F0', height: 520 }}>
 
           {/* Image side */}
           <Link href={`/product/${hero._id}`} style={{ display: 'block', overflow: 'hidden', background: '#EBEBEB', textDecoration: 'none', position: 'relative' }}>
@@ -161,7 +161,7 @@ export default function HomePage() {
                 className="hero-img"
               />
             ) : (
-              <div style={{ position: 'absolute', inset: 0, background: '#DEDEDE' }} />
+              <div style={{ position: 'absolute', inset: 0, background: '#EBEBEB' }} />
             )}
             {/* Sale badge */}
             {hero.sale > 0 && (
@@ -271,7 +271,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 1, background: '#DEDEDE' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 1, background: '#F0F0F0' }}>
             {gridProducts.map(p => (
               <div key={p._id} style={{ background: '#F2F2F2', padding: 14 }}>
                 <ProductCard product={p} />

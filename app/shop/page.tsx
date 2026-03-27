@@ -265,7 +265,7 @@ function ShopContent() {
         {/* ── Product grid ── */}
         <div style={{ padding: '0 28px 80px', flex: 1 }}>
           {loading ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))', gap: 1, background: '#DEDEDE' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))', gap: 1, background: '#F0F0F0' }}>
               {[...Array(8)].map((_, i) => (
                 <div key={i} style={{ background: '#F2F2F2', padding: 14 }}>
                   <div style={{ aspectRatio: '3/4', background: '#E8E8E8' }} className="sk" />
@@ -284,7 +284,7 @@ function ShopContent() {
               )}
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))', gap: 1, background: '#DEDEDE' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))', gap: 1, background: '#F0F0F0' }}>
               {filtered.map(p => (
                 <div key={p._id} style={{ background: '#F2F2F2', padding: 14 }}>
                   <ProductCard product={p} />

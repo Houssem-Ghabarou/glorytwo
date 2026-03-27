@@ -20,7 +20,7 @@ export default function ProductCard({ product }: { product: Product }) {
             className="product-img"
           />
         ) : (
-          <div style={{ width: '100%', height: '100%', background: '#DEDEDE' }} />
+          <div style={{ width: '100%', height: '100%', background: '#EBEBEB' }} />
         )}
         {isOnSale && (
           <span style={{
