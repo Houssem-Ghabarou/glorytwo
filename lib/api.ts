@@ -1,3 +1,6 @@
+import { DEMO_PRODUCTS, getDemoProductById } from './demoProducts'
+import type { Product } from '@/types'
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'
 
 async function apiFetch(endpoint: string, options?: RequestInit) {
@@ -13,11 +16,28 @@ async function apiFetch(endpoint: string, options?: RequestInit) {
   return res.json()
 }
 
-export const getProducts = () =>
-  apiFetch('/products/product', { cache: 'no-store' })
+/** Products from API, or demo catalog when the server is unreachable or returns an error. */
+export async function getProducts(): Promise<Product[]> {
+  try {
+    const res = await fetch(`${API_URL}/products/product`, { cache: 'no-store' })
+    if (!res.ok) return DEMO_PRODUCTS
+    const data = await res.json()
+    return Array.isArray(data) ? data : DEMO_PRODUCTS
+  } catch {
+    return DEMO_PRODUCTS
+  }
+}
 
-export const getProduct = (id: string) =>
-  apiFetch(`/products/product/${id}`, { cache: 'no-store' })
+/** Single product from API; falls back to demo item by id when fetch fails or response is not OK. */
+export async function getProduct(id: string): Promise<Product | null> {
+  try {
+    const res = await fetch(`${API_URL}/products/product/${id}`, { cache: 'no-store' })
+    if (!res.ok) return getDemoProductById(id)
+    return res.json()
+  } catch {
+    return getDemoProductById(id) ?? null
+  }
+}
 
 export const createOrder = (data: object) =>
   apiFetch('/orders/order', {

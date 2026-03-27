@@ -6,7 +6,7 @@ import CartDrawer from '@/components/CartDrawer'
 import NewsletterModal from '@/components/NewsletterModal'
 
 export const metadata: Metadata = {
-  title: 'Glory — New Collection SS25',
+  title: 'Glory — Fashion for the Bold',
   description: 'Premium fashion — new collection available now.',
 }
 
