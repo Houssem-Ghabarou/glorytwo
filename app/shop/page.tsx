@@ -158,54 +158,65 @@ function ShopContent() {
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
 
         {/* Page title bar */}
-        <div style={{ padding: '20px 28px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ padding: '20px 28px 0' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
             <h1 style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', margin: 0 }}>Shop</h1>
             {!loading && (
               <span style={{ fontSize: 11, color: '#6B6B6B' }}>— {filtered.length} products</span>
             )}
           </div>
+        </div>
 
-          {/* Mobile filter toggle — hidden on desktop via CSS */}
-          <div className="mobile-filter-bar" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            {hasFilters && (
-              <button
-                onClick={clearAll}
-                style={{
-                  fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase',
-                  color: '#0A4DCC', background: 'none', border: 'none', cursor: 'pointer',
-                  fontFamily: 'inherit', padding: 0, textDecoration: 'underline',
-                }}
-              >
-                Reset
-              </button>
-            )}
+        {/* Mobile sticky filter bar — hidden on desktop */}
+        <div className="mobile-filter-bar" style={{
+          position: 'sticky', top: 88,
+          zIndex: 50,
+          background: '#F2F2F2',
+          borderBottom: '1px solid #DEDEDE',
+          padding: '10px 20px',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          {hasFilters ? (
             <button
-              onClick={() => setFilterSheetOpen(true)}
+              onClick={clearAll}
               style={{
-                display: 'flex', alignItems: 'center', gap: 7,
-                background: hasFilters ? '#000' : 'none',
-                color: hasFilters ? '#fff' : '#000',
-                border: '1px solid #000',
-                padding: '7px 14px',
-                fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase',
-                fontFamily: 'inherit', cursor: 'pointer',
+                fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase',
+                color: '#0A4DCC', background: 'none', border: 'none', cursor: 'pointer',
+                fontFamily: 'inherit', padding: 0, textDecoration: 'underline',
               }}
             >
-              <SlidersHorizontal size={13} strokeWidth={1.5} />
-              Filter
-              {hasFilters && (
-                <span style={{
-                  background: '#fff', color: '#000',
-                  borderRadius: '50%', width: 16, height: 16,
-                  fontSize: 9, fontWeight: 700,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                  {[collection, category, gender, search].filter(Boolean).length}
-                </span>
-              )}
+              Reset
             </button>
-          </div>
+          ) : (
+            <span style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B6B6B' }}>
+              {loading ? '' : `${filtered.length} products`}
+            </span>
+          )}
+          <button
+            onClick={() => setFilterSheetOpen(true)}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 7,
+              background: hasFilters ? '#000' : 'none',
+              color: hasFilters ? '#fff' : '#000',
+              border: '1px solid #000',
+              padding: '7px 14px',
+              fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase',
+              fontFamily: 'inherit', cursor: 'pointer',
+            }}
+          >
+            <SlidersHorizontal size={13} strokeWidth={1.5} />
+            Filter
+            {hasFilters && (
+              <span style={{
+                background: '#fff', color: '#000',
+                borderRadius: '50%', width: 16, height: 16,
+                fontSize: 9, fontWeight: 700,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                {[collection, category, gender, search].filter(Boolean).length}
+              </span>
+            )}
+          </button>
         </div>
 
         {/* ── Search bar — big, close to grid ── */}
