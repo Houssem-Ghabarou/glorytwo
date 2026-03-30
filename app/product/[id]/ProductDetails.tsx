@@ -3,12 +3,14 @@
 import { useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ChevronLeft, ShoppingBag } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { ChevronLeft, ShoppingBag, Zap } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import type { Product } from '@/types'
 
 export default function ProductDetails({ product }: { product: Product }) {
   const { addItem } = useCart()
+  const router = useRouter()
 
   const [activeImg, setActiveImg] = useState(0)
   const [selectedColor, setSelectedColor] = useState(product.variations?.[0]?.color ?? '')
@@ -69,6 +71,22 @@ export default function ProductDetails({ product }: { product: Product }) {
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 1800)
+  }
+
+  const handleBuyNow = () => {
+    if (!selectedSize) return
+    const colorName = variation?.name || selectedColor
+    addItem({
+      _id: product._id,
+      name: product.name,
+      price,
+      image: product.images?.[0] ?? '',
+      color: selectedColor,
+      colorName,
+      size: selectedSize,
+      quantity: qty,
+    })
+    router.push('/checkout')
   }
 
   return (
@@ -267,6 +285,27 @@ export default function ProductDetails({ product }: { product: Product }) {
             {added ? 'Added to Cart!' : 'Add to Cart'}
           </button>
 
+          {/* ── Buy Now ── */}
+          <button
+            onClick={handleBuyNow}
+            disabled={!selectedSize}
+            className="product-buy-btn"
+            style={{
+              width: '100%', padding: '16px 24px', marginTop: 10,
+              fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase',
+              fontFamily: 'inherit', fontWeight: 600,
+              background: !selectedSize ? 'transparent' : '#c8a96e',
+              color: !selectedSize ? '#c4b9a8' : '#fff',
+              border: !selectedSize ? '1px solid #e0d8cc' : '1px solid #c8a96e',
+              cursor: !selectedSize ? 'not-allowed' : 'pointer',
+              transition: 'all 0.3s',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+            }}
+          >
+            <Zap size={14} />
+            Buy Now
+          </button>
+
           {/* ── Meta ── */}
           <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid #e0d8cc', display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             {product.category && (
@@ -294,6 +333,7 @@ export default function ProductDetails({ product }: { product: Product }) {
       <style>{`
         .product-gallery-main:active { cursor: grabbing; }
         .product-add-btn:hover:not(:disabled) { background: #c8a96e !important; }
+        .product-buy-btn:hover:not(:disabled) { background: #9a7a45 !important; border-color: #9a7a45 !important; }
         @media (max-width: 768px) {
           .product-layout { grid-template-columns: 1fr !important; gap: 24px !important; }
         }
