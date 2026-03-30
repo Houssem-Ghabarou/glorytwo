@@ -82,7 +82,7 @@ export default function NewsletterModal() {
         onClick={close}
         style={{
           position: 'fixed', inset: 0, zIndex: 500,
-          background: 'rgba(0,0,0,0.5)',
+          background: 'rgba(13,13,11,0.5)',
           backdropFilter: 'blur(3px)',
           animation: 'fadeIn 0.35s ease',
         }}
@@ -102,8 +102,8 @@ export default function NewsletterModal() {
       }}>
         {/* Left — editorial dark panel */}
         <div className="glory-newsletter-modal-left" style={{
-          background: '#0A0A0A',
-          color: '#F5F5F0',
+          background: '#1a1a18',
+          color: '#f5f0e8',
           padding: '52px 40px',
           display: 'flex',
           flexDirection: 'column',
@@ -111,7 +111,7 @@ export default function NewsletterModal() {
         }}>
           <span style={{
             fontSize: 10, letterSpacing: '0.22em',
-            textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)',
+            textTransform: 'uppercase', color: '#c8a96e',
             fontWeight: 500,
           }}>
             Glory Studio
@@ -119,13 +119,14 @@ export default function NewsletterModal() {
 
           <div>
             <p style={{
+              fontFamily: "'Cormorant Garamond', serif",
               fontSize: 32, fontWeight: 300, lineHeight: 1.15,
               letterSpacing: '-0.02em', margin: '0 0 16px',
             }}>
               First to know.<br />Always.
             </p>
             <p style={{
-              fontSize: 12, color: 'rgba(255,255,255,0.45)',
+              fontSize: 12, color: 'rgba(245,240,232,0.45)',
               lineHeight: 1.7, letterSpacing: '0.02em',
             }}>
               New arrivals, exclusive drops,<br />and nothing else.
@@ -134,7 +135,7 @@ export default function NewsletterModal() {
 
           <span style={{
             fontSize: 9, letterSpacing: '0.15em',
-            textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)',
+            textTransform: 'uppercase', color: 'rgba(245,240,232,0.2)',
           }}>
             SS25 Collection
           </span>
@@ -142,7 +143,7 @@ export default function NewsletterModal() {
 
         {/* Right — form panel */}
         <div className="glory-newsletter-modal-right" style={{
-          background: '#F2F2F2',
+          background: '#f5f0e8',
           padding: '52px 40px',
           display: 'flex',
           flexDirection: 'column',
@@ -156,7 +157,7 @@ export default function NewsletterModal() {
             style={{
               position: 'absolute', top: 20, right: 20,
               background: 'none', border: 'none', cursor: 'pointer',
-              padding: 4, display: 'flex', color: '#000', opacity: 0.4,
+              padding: 4, display: 'flex', color: '#1a1a18', opacity: 0.4,
               transition: 'opacity 0.2s',
             }}
             onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
@@ -168,12 +169,13 @@ export default function NewsletterModal() {
           {done ? (
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
               <p style={{
-                fontSize: 22, fontWeight: 300, letterSpacing: '-0.01em',
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: 26, fontWeight: 300, letterSpacing: '-0.01em',
                 lineHeight: 1.3, marginBottom: 12,
               }}>
                 You're in.
               </p>
-              <p style={{ fontSize: 12, color: '#6B6B6B', lineHeight: 1.7 }}>
+              <p style={{ fontSize: 12, color: '#7a7468', lineHeight: 1.7 }}>
                 Welcome to Glory. Expect only the essentials.
               </p>
             </div>
@@ -181,7 +183,7 @@ export default function NewsletterModal() {
             <>
               <div>
                 <p style={{
-                  fontSize: 13, color: '#6B6B6B', lineHeight: 1.7,
+                  fontSize: 13, color: '#7a7468', lineHeight: 1.7,
                   letterSpacing: '0.01em', marginBottom: 32,
                 }}>
                   Subscribe for early access to new collections and exclusive offers.
@@ -200,29 +202,28 @@ export default function NewsletterModal() {
                     style={{
                       width: '100%',
                       minWidth: 0,
-                      border: '1px solid #DEDEDE',
-                      background: '#fff', padding: '13px 16px',
+                      border: '1px solid #e0d8cc',
+                      background: '#fdfcfa', padding: '13px 16px',
                       fontFamily: 'inherit',
                       outline: 'none', transition: 'border-color 0.2s',
                       boxSizing: 'border-box',
                     }}
-                    onFocus={e => (e.currentTarget.style.borderColor = '#000')}
-                    onBlur={e => (e.currentTarget.style.borderColor = '#DEDEDE')}
+                    onFocus={e => (e.currentTarget.style.borderColor = '#1a1a18')}
+                    onBlur={e => (e.currentTarget.style.borderColor = '#e0d8cc')}
                   />
                   <button
                     type="submit"
                     disabled={loading}
+                    className="newsletter-submit-btn"
                     style={{
-                      background: '#000', color: '#fff',
+                      background: '#1a1a18', color: '#f5f0e8',
                       border: 'none', padding: '13px 0',
                       fontSize: 11, letterSpacing: '0.18em',
                       textTransform: 'uppercase', cursor: loading ? 'default' : 'pointer',
                       fontFamily: 'inherit', fontWeight: 500,
                       opacity: loading ? 0.6 : 1,
-                      transition: 'background 0.2s, opacity 0.2s',
+                      transition: 'background 0.3s, opacity 0.2s',
                     }}
-                    onMouseEnter={e => { if (!loading) e.currentTarget.style.background = '#0A4DCC' }}
-                    onMouseLeave={e => { e.currentTarget.style.background = '#000' }}
                   >
                     {loading ? 'Subscribing…' : 'Subscribe'}
                   </button>
@@ -234,12 +235,12 @@ export default function NewsletterModal() {
                 style={{
                   background: 'none', border: 'none', cursor: 'pointer',
                   fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase',
-                  color: '#6B6B6B', padding: 0, fontFamily: 'inherit',
+                  color: '#7a7468', padding: 0, fontFamily: 'inherit',
                   textDecoration: 'underline', alignSelf: 'flex-start',
                   transition: 'color 0.2s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#000')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#6B6B6B')}
+                onMouseEnter={e => (e.currentTarget.style.color = '#1a1a18')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#7a7468')}
               >
                 No thanks
               </button>
@@ -257,6 +258,7 @@ export default function NewsletterModal() {
           from { opacity: 0; transform: translate(-50%, -46%); }
           to   { opacity: 1; transform: translate(-50%, -50%); }
         }
+        .newsletter-submit-btn:hover:not(:disabled) { background: #c8a96e !important; }
         @media (max-width: 560px) {
           .glory-newsletter-modal {
             grid-template-columns: 1fr !important;

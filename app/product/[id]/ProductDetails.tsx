@@ -75,7 +75,7 @@ export default function ProductDetails({ product }: { product: Product }) {
     <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 24px 80px' }}>
       {/* Back */}
       <div style={{ padding: '20px 0' }}>
-        <Link href="/shop" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#6B6B6B', textDecoration: 'none' }}>
+        <Link href="/shop" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7a7468', textDecoration: 'none' }}>
           <ChevronLeft size={14} /> Shop
         </Link>
       </div>
@@ -93,7 +93,7 @@ export default function ProductDetails({ product }: { product: Product }) {
             style={{
               position: 'relative',
               aspectRatio: '3/4',
-              background: '#EBEBEB',
+              background: '#e8dfd0',
               overflow: 'hidden',
               marginBottom: 8,
               cursor: imageCount > 1 ? 'grab' : 'default',
@@ -112,7 +112,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             ) : (
-              <div style={{ width: '100%', height: '100%', background: '#DEDEDE' }} />
+              <div style={{ width: '100%', height: '100%', background: '#e0d8cc' }} />
             )}
           </div>
 
@@ -125,7 +125,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                   onClick={() => setActiveImg(i)}
                   style={{
                     position: 'relative', width: 64, height: 80, flexShrink: 0,
-                    background: '#EBEBEB', border: i === activeImg ? '2px solid #000' : '2px solid transparent',
+                    background: '#e8dfd0', border: i === activeImg ? '2px solid #1a1a18' : '2px solid transparent',
                     cursor: 'pointer', padding: 0, overflow: 'hidden',
                     transition: 'border-color 0.15s',
                   }}
@@ -140,27 +140,36 @@ export default function ProductDetails({ product }: { product: Product }) {
         {/* ── Info ── */}
         <div style={{ paddingTop: 8 }}>
           {product.collection && (
-            <p className="label-xs" style={{ marginBottom: 12 }}>{product.collection}</p>
+            <p style={{
+              fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase',
+              color: '#c8a96e', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10,
+            }}>
+              <span style={{ display: 'block', width: 20, height: 1, background: '#c8a96e' }} />
+              {product.collection}
+            </p>
           )}
-          <h1 style={{ fontSize: 'clamp(22px, 3vw, 32px)', fontWeight: 700, lineHeight: 1.1, marginBottom: 16 }}>
+          <h1 style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 300, lineHeight: 1.1, marginBottom: 16,
+          }}>
             {product.name}
           </h1>
 
           {/* Price */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 28 }}>
             {product.sale > 0 ? (
               <>
-                <span style={{ fontSize: 22, fontWeight: 700, color: '#0A4DCC' }}>${product.sale}</span>
-                <span style={{ fontSize: 16, color: '#6B6B6B', textDecoration: 'line-through' }}>${product.price}</span>
+                <span style={{ fontSize: 22, fontWeight: 500, color: '#1a1a18' }}>${product.sale}</span>
+                <span style={{ fontSize: 16, color: '#7a7468', textDecoration: 'line-through' }}>${product.price}</span>
               </>
             ) : (
-              <span style={{ fontSize: 22, fontWeight: 700 }}>${product.price}</span>
+              <span style={{ fontSize: 22, fontWeight: 500 }}>${product.price}</span>
             )}
           </div>
 
           {/* Description */}
           {product.description && (
-            <p style={{ fontSize: 13, lineHeight: 1.7, color: '#444', marginBottom: 32 }}>
+            <p style={{ fontSize: 13, lineHeight: 1.8, color: '#7a7468', marginBottom: 32, fontWeight: 300 }}>
               {product.description}
             </p>
           )}
@@ -169,7 +178,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           {product.variations?.length > 0 && (
             <div style={{ marginBottom: 24 }}>
               <p className="label-xs" style={{ marginBottom: 12 }}>
-                Color — <span style={{ color: '#000', textTransform: 'none', letterSpacing: 0 }}>{variation?.name || selectedColor}</span>
+                Color — <span style={{ color: '#1a1a18', textTransform: 'none', letterSpacing: 0 }}>{variation?.name || selectedColor}</span>
               </p>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 {product.variations.map(v => (
@@ -181,8 +190,8 @@ export default function ProductDetails({ product }: { product: Product }) {
                       width: 28, height: 28,
                       borderRadius: '50%',
                       background: v.color,
-                      border: selectedColor === v.color ? '2px solid #000' : '2px solid #DEDEDE',
-                      outline: selectedColor === v.color ? '1px solid #000' : 'none',
+                      border: selectedColor === v.color ? '2px solid #1a1a18' : '2px solid #e0d8cc',
+                      outline: selectedColor === v.color ? '1px solid #1a1a18' : 'none',
                       outlineOffset: 2,
                       cursor: 'pointer',
                       transition: 'border-color 0.15s',
@@ -209,9 +218,9 @@ export default function ProductDetails({ product }: { product: Product }) {
                       style={{
                         minWidth: 44, padding: '8px 12px',
                         fontSize: 12, fontFamily: 'inherit', letterSpacing: '0.05em',
-                        border: isSelected ? '1px solid #000' : '1px solid #DEDEDE',
-                        background: isSelected ? '#000' : outOfStock ? '#F8F8F8' : '#fff',
-                        color: isSelected ? '#fff' : outOfStock ? '#BABABA' : '#000',
+                        border: isSelected ? '1px solid #1a1a18' : '1px solid #e0d8cc',
+                        background: isSelected ? '#1a1a18' : outOfStock ? '#faf7f2' : '#fdfcfa',
+                        color: isSelected ? '#f5f0e8' : outOfStock ? '#c4b9a8' : '#1a1a18',
                         cursor: outOfStock ? 'not-allowed' : 'pointer',
                         textDecoration: outOfStock ? 'line-through' : 'none',
                         transition: 'all 0.15s',
@@ -223,7 +232,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 })}
               </div>
               {!selectedSize && (
-                <p style={{ fontSize: 11, color: '#6B6B6B', marginTop: 8 }}>Please select a size</p>
+                <p style={{ fontSize: 11, color: '#7a7468', marginTop: 8 }}>Please select a size</p>
               )}
             </div>
           )}
@@ -232,9 +241,9 @@ export default function ProductDetails({ product }: { product: Product }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
             <p className="label-xs">Qty</p>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <button onClick={() => setQty(q => Math.max(1, q - 1))} style={{ width: 36, height: 40, border: '1px solid #DEDEDE', background: '#fff', cursor: 'pointer', fontSize: 18, lineHeight: 1 }}>−</button>
-              <span style={{ width: 44, textAlign: 'center', borderTop: '1px solid #DEDEDE', borderBottom: '1px solid #DEDEDE', height: 40, lineHeight: '40px', fontSize: 13 }}>{qty}</span>
-              <button onClick={() => setQty(q => q + 1)} style={{ width: 36, height: 40, border: '1px solid #DEDEDE', background: '#fff', cursor: 'pointer', fontSize: 18, lineHeight: 1 }}>+</button>
+              <button onClick={() => setQty(q => Math.max(1, q - 1))} style={{ width: 36, height: 40, border: '1px solid #e0d8cc', background: '#fdfcfa', cursor: 'pointer', fontSize: 18, lineHeight: 1 }}>−</button>
+              <span style={{ width: 44, textAlign: 'center', borderTop: '1px solid #e0d8cc', borderBottom: '1px solid #e0d8cc', height: 40, lineHeight: '40px', fontSize: 13 }}>{qty}</span>
+              <button onClick={() => setQty(q => q + 1)} style={{ width: 36, height: 40, border: '1px solid #e0d8cc', background: '#fdfcfa', cursor: 'pointer', fontSize: 18, lineHeight: 1 }}>+</button>
             </div>
           </div>
 
@@ -242,14 +251,15 @@ export default function ProductDetails({ product }: { product: Product }) {
           <button
             onClick={handleAddToCart}
             disabled={!selectedSize}
+            className="product-add-btn"
             style={{
               width: '100%', padding: '16px 24px',
               fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase',
               fontFamily: 'inherit', fontWeight: 600,
-              background: added ? '#0A4DCC' : !selectedSize ? '#DEDEDE' : '#000',
-              color: !selectedSize ? '#6B6B6B' : '#fff',
+              background: added ? '#c8a96e' : !selectedSize ? '#e0d8cc' : '#1a1a18',
+              color: !selectedSize ? '#7a7468' : '#f5f0e8',
               border: 'none', cursor: !selectedSize ? 'not-allowed' : 'pointer',
-              transition: 'background 0.2s',
+              transition: 'background 0.3s',
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
             }}
           >
@@ -258,7 +268,7 @@ export default function ProductDetails({ product }: { product: Product }) {
           </button>
 
           {/* ── Meta ── */}
-          <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid #DEDEDE', display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+          <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid #e0d8cc', display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             {product.category && (
               <div>
                 <p className="label-xs" style={{ marginBottom: 4 }}>Category</p>
@@ -274,7 +284,7 @@ export default function ProductDetails({ product }: { product: Product }) {
             {product.reference && (
               <div>
                 <p className="label-xs" style={{ marginBottom: 4 }}>Ref</p>
-                <p style={{ fontSize: 12, color: '#6B6B6B' }}>{product.reference}</p>
+                <p style={{ fontSize: 12, color: '#7a7468' }}>{product.reference}</p>
               </div>
             )}
           </div>
@@ -283,6 +293,7 @@ export default function ProductDetails({ product }: { product: Product }) {
 
       <style>{`
         .product-gallery-main:active { cursor: grabbing; }
+        .product-add-btn:hover:not(:disabled) { background: #c8a96e !important; }
         @media (max-width: 768px) {
           .product-layout { grid-template-columns: 1fr !important; gap: 24px !important; }
         }

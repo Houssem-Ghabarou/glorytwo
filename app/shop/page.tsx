@@ -21,7 +21,7 @@ function FilterGroup({
   if (options.length === 0) return null
   return (
     <div style={{ marginBottom: 28 }}>
-      <p style={{ fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#6B6B6B', margin: '0 0 12px', fontWeight: 600 }}>
+      <p style={{ fontSize: 10, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#c8a96e', margin: '0 0 12px', fontWeight: 600 }}>
         {label}
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -30,9 +30,9 @@ function FilterGroup({
           style={{
             textAlign: 'left', border: 'none', cursor: 'pointer',
             padding: '7px 10px', fontSize: 12, fontFamily: 'inherit',
-            color: !value ? '#000' : '#6B6B6B',
+            color: !value ? '#1a1a18' : '#7a7468',
             fontWeight: !value ? 600 : 400,
-            background: !value ? '#EBEBEB' : 'transparent',
+            background: !value ? '#e8dfd0' : 'transparent',
             transition: 'all .15s',
           } as React.CSSProperties}
         >
@@ -45,9 +45,9 @@ function FilterGroup({
             style={{
               textAlign: 'left', border: 'none', cursor: 'pointer',
               padding: '7px 10px', fontSize: 12, fontFamily: 'inherit',
-              color: value === o ? '#000' : '#6B6B6B',
+              color: value === o ? '#1a1a18' : '#7a7468',
               fontWeight: value === o ? 600 : 400,
-              background: value === o ? '#EBEBEB' : 'transparent',
+              background: value === o ? '#e8dfd0' : 'transparent',
               transition: 'all .15s',
             } as React.CSSProperties}
           >
@@ -102,10 +102,10 @@ function ShopContent() {
         style={{
           width: 220,
           flexShrink: 0,
-          borderRight: '1px solid #DEDEDE',
+          borderRight: '1px solid #e0d8cc',
           padding: '32px 24px',
           position: 'sticky',
-          top: 68,           /* header height */
+          top: 68,
           height: 'calc(100vh - 68px)',
           overflowY: 'auto',
           boxSizing: 'border-box',
@@ -119,7 +119,7 @@ function ShopContent() {
           {hasFilters && (
             <button
               onClick={clearAll}
-              style={{ fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#0A4DCC', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}
+              style={{ fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: '#c8a96e', background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}
             >
               Clear
             </button>
@@ -132,8 +132,8 @@ function ShopContent() {
 
         {/* Active chips at bottom of sidebar */}
         {hasFilters && (
-          <div style={{ marginTop: 8, paddingTop: 20, borderTop: '1px solid #DEDEDE', display: 'flex', flexDirection: 'column', gap: 6 }}>
-            <p style={{ fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#6B6B6B', margin: '0 0 6px' }}>Active</p>
+          <div style={{ marginTop: 8, paddingTop: 20, borderTop: '1px solid #e0d8cc', display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <p style={{ fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#7a7468', margin: '0 0 6px' }}>Active</p>
             {[
               collection && { label: collection,  clear: () => setCollection('') },
               category   && { label: category,    clear: () => setCategory('') },
@@ -142,10 +142,10 @@ function ShopContent() {
             ].filter(Boolean).map((f: any) => (
               <span
                 key={f.label}
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 11, padding: '4px 8px', background: '#000', color: '#fff' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: 11, padding: '4px 8px', background: '#1a1a18', color: '#f5f0e8' }}
               >
                 {f.label}
-                <button onClick={f.clear} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#fff', display: 'flex', padding: 0, marginLeft: 6 }}>
+                <button onClick={f.clear} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#f5f0e8', display: 'flex', padding: 0, marginLeft: 6 }}>
                   <X size={10} />
                 </button>
               </span>
@@ -158,11 +158,17 @@ function ShopContent() {
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
 
         {/* Page title bar */}
-        <div style={{ padding: '20px 28px 0' }}>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
-            <h1 style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', margin: 0 }}>Shop</h1>
+        <div style={{ padding: '32px 28px 0' }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 12 }}>
+            <h1 style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 300,
+              margin: 0, letterSpacing: '-0.01em',
+            }}>
+              Shop
+            </h1>
             {!loading && (
-              <span style={{ fontSize: 11, color: '#6B6B6B' }}>— {filtered.length} products</span>
+              <span style={{ fontSize: 11, color: '#7a7468' }}>— {filtered.length} products</span>
             )}
           </div>
         </div>
@@ -171,8 +177,8 @@ function ShopContent() {
         <div className="mobile-filter-bar" style={{
           position: 'sticky', top: 88,
           zIndex: 50,
-          background: '#F2F2F2',
-          borderBottom: '1px solid #DEDEDE',
+          background: '#f5f0e8',
+          borderBottom: '1px solid #e0d8cc',
           padding: '10px 20px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}>
@@ -181,14 +187,14 @@ function ShopContent() {
               onClick={clearAll}
               style={{
                 fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase',
-                color: '#0A4DCC', background: 'none', border: 'none', cursor: 'pointer',
+                color: '#c8a96e', background: 'none', border: 'none', cursor: 'pointer',
                 fontFamily: 'inherit', padding: 0, textDecoration: 'underline',
               }}
             >
               Reset
             </button>
           ) : (
-            <span style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#6B6B6B' }}>
+            <span style={{ fontSize: 10, letterSpacing: '0.12em', textTransform: 'uppercase', color: '#7a7468' }}>
               {loading ? '' : `${filtered.length} products`}
             </span>
           )}
@@ -196,9 +202,9 @@ function ShopContent() {
             onClick={() => setFilterSheetOpen(true)}
             style={{
               display: 'flex', alignItems: 'center', gap: 7,
-              background: hasFilters ? '#000' : 'none',
-              color: hasFilters ? '#fff' : '#000',
-              border: '1px solid #000',
+              background: hasFilters ? '#1a1a18' : 'none',
+              color: hasFilters ? '#f5f0e8' : '#1a1a18',
+              border: '1px solid #1a1a18',
               padding: '7px 14px',
               fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase',
               fontFamily: 'inherit', cursor: 'pointer',
@@ -208,7 +214,7 @@ function ShopContent() {
             Filter
             {hasFilters && (
               <span style={{
-                background: '#fff', color: '#000',
+                background: '#f5f0e8', color: '#1a1a18',
                 borderRadius: '50%', width: 16, height: 16,
                 fontSize: 9, fontWeight: 700,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -219,12 +225,12 @@ function ShopContent() {
           </button>
         </div>
 
-        {/* ── Search bar — big, close to grid ── */}
+        {/* ── Search bar ── */}
         <div style={{ padding: '16px 28px 20px' }}>
           <div style={{ position: 'relative' }}>
             <Search
               size={16}
-              style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: '#6B6B6B', pointerEvents: 'none' }}
+              style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', color: '#7a7468', pointerEvents: 'none' }}
             />
             <input
               className="shop-search-input"
@@ -245,20 +251,20 @@ function ShopContent() {
                 paddingTop: 14,
                 paddingBottom: 14,
                 fontFamily: 'inherit',
-                border: '1px solid #DEDEDE',
-                background: '#fff',
+                border: '1px solid #e0d8cc',
+                background: '#fdfcfa',
                 outline: 'none',
                 transition: 'border-color .2s',
               }}
-              onFocus={e => (e.target.style.borderColor = '#000')}
-              onBlur={e => (e.target.style.borderColor = '#DEDEDE')}
+              onFocus={e => (e.target.style.borderColor = '#1a1a18')}
+              onBlur={e => (e.target.style.borderColor = '#e0d8cc')}
             />
             {search && (
               <button
                 onClick={() => setSearch('')}
                 style={{
                   position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)',
-                  background: 'none', border: 'none', cursor: 'pointer', color: '#6B6B6B',
+                  background: 'none', border: 'none', cursor: 'pointer', color: '#7a7468',
                   display: 'flex', padding: 2,
                 }}
               >
@@ -274,17 +280,20 @@ function ShopContent() {
             <div className="hairline-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))' }}>
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="product-tile">
-                  <div style={{ aspectRatio: '3/4', background: '#E8E8E8' }} className="sk" />
-                  <div style={{ height: 10, background: '#E8E8E8', marginTop: 10, width: '60%' }} className="sk" />
-                  <div style={{ height: 10, background: '#E8E8E8', marginTop: 6,  width: '30%' }} className="sk" />
+                  <div style={{ aspectRatio: '3/4', background: '#e8dfd0' }} className="sk" />
+                  <div style={{ height: 10, background: '#e8dfd0', marginTop: 10, width: '60%' }} className="sk" />
+                  <div style={{ height: 10, background: '#e8dfd0', marginTop: 6,  width: '30%' }} className="sk" />
                 </div>
               ))}
             </div>
           ) : filtered.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '80px 0', color: '#6B6B6B' }}>
-              <p style={{ fontSize: 13, marginBottom: 16 }}>No products found.</p>
+            <div style={{ textAlign: 'center', padding: '80px 0', color: '#7a7468' }}>
+              <p style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: '1.3rem', fontWeight: 300, fontStyle: 'italic', marginBottom: 16,
+              }}>No products found.</p>
               {hasFilters && (
-                <button onClick={clearAll} style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', color: '#000', fontFamily: 'inherit' }}>
+                <button onClick={clearAll} style={{ fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'underline', background: 'none', border: 'none', cursor: 'pointer', color: '#1a1a18', fontFamily: 'inherit' }}>
                   Clear all filters
                 </button>
               )}
@@ -307,7 +316,7 @@ function ShopContent() {
         onClick={() => setFilterSheetOpen(false)}
         style={{
           position: 'fixed', inset: 0, zIndex: 400,
-          background: 'rgba(0,0,0,0.4)',
+          background: 'rgba(13,13,11,0.5)',
           opacity: filterSheetOpen ? 1 : 0,
           pointerEvents: filterSheetOpen ? 'auto' : 'none',
           transition: 'opacity 0.3s ease',
@@ -317,8 +326,8 @@ function ShopContent() {
       {/* Sheet */}
       <div style={{
         position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 401,
-        background: '#F2F2F2',
-        borderTop: '1px solid #DEDEDE',
+        background: '#f5f0e8',
+        borderTop: '1px solid #e0d8cc',
         borderRadius: '16px 16px 0 0',
         padding: '0 24px 40px',
         maxHeight: '80dvh',
@@ -330,8 +339,8 @@ function ShopContent() {
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           padding: '16px 0 24px',
-          position: 'sticky', top: 0, background: '#F2F2F2', zIndex: 1,
-          borderBottom: '1px solid #DEDEDE', marginBottom: 24,
+          position: 'sticky', top: 0, background: '#f5f0e8', zIndex: 1,
+          borderBottom: '1px solid #e0d8cc', marginBottom: 24,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', margin: 0 }}>
@@ -342,7 +351,7 @@ function ShopContent() {
                 onClick={clearAll}
                 style={{
                   fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase',
-                  color: '#0A4DCC', background: 'none', border: 'none',
+                  color: '#c8a96e', background: 'none', border: 'none',
                   cursor: 'pointer', fontFamily: 'inherit', padding: 0,
                 }}
               >
@@ -366,11 +375,13 @@ function ShopContent() {
         <button
           onClick={() => setFilterSheetOpen(false)}
           style={{
-            width: '100%', background: '#000', color: '#fff',
+            width: '100%', background: '#1a1a18', color: '#f5f0e8',
             border: 'none', padding: '14px 0',
             fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
             fontFamily: 'inherit', cursor: 'pointer', marginTop: 8,
+            transition: 'background 0.3s',
           }}
+          className="shop-apply-btn"
         >
           {hasFilters ? `Show ${filtered.length} results` : 'Done'}
         </button>
@@ -380,6 +391,7 @@ function ShopContent() {
         .sk { animation: sk 1.5s ease-in-out infinite; }
         @keyframes sk { 0%,100%{opacity:1} 50%{opacity:.4} }
         .mobile-filter-bar { display: none; }
+        .shop-apply-btn:hover { background: #c8a96e !important; }
         @media (max-width: 768px) {
           .shop-sidebar { display: none; }
           .mobile-filter-bar { display: flex; }
