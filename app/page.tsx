@@ -154,84 +154,80 @@ export default function HomePage() {
     <div>
 
       {/* ══════════════════════════════════════
-          HERO — 50/50 editorial split
+          FULL-WIDTH HERO — brand introduction
       ══════════════════════════════════════ */}
-      <section style={{ maxWidth: 1440, margin: '0 auto' }}>
-        <div className="hero-grid hairline-grid" style={{ gridTemplateColumns: '1fr 1fr', height: 520 }}>
+      <section style={{ position: 'relative', width: '100vw', height: 'clamp(400px, 70vh, 700px)', overflow: 'hidden', marginLeft: 'calc(-50vw + 50%)' }}>
+        {/* Background image */}
+        {hero.images?.[0] ? (
+          <Image
+            src={hero.images[0]}
+            alt="Glory"
+            fill priority
+            sizes="100vw"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            className="hero-bg-img"
+          />
+        ) : (
+          <div style={{ position: 'absolute', inset: 0, background: '#EBEBEB' }} />
+        )}
 
-          {/* Image side */}
-          <Link href={`/product/${hero._id}`} style={{ display: 'block', overflow: 'hidden', background: '#EBEBEB', textDecoration: 'none', position: 'relative' }}>
-            {hero.images?.[0] ? (
-              <Image
-                src={hero.images[0]}
-                alt={hero.name}
-                fill priority
-                sizes="(max-width:768px) 100vw, 50vw"
-                style={{ objectFit: 'cover', transition: 'transform .7s cubic-bezier(.4,0,.2,1)' }}
-                className="hero-img"
-              />
-            ) : (
-              <div style={{ position: 'absolute', inset: 0, background: 'var(--color-placeholder)' }} />
-            )}
-            {/* Sale badge */}
-            {hero.sale > 0 && (
-              <span style={{ position: 'absolute', top: 16, left: 16, background: '#0A4DCC', color: '#fff', fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase', padding: '4px 9px', fontWeight: 700 }}>
-                Sale
-              </span>
-            )}
+        {/* Dark overlay */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%)',
+        }} />
+
+        {/* Content overlay */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          textAlign: 'center', color: '#fff', padding: '40px 20px'
+        }}>
+          <h1 style={{
+            fontSize: 'clamp(48px, 8vw, 80px)',
+            fontWeight: 900, letterSpacing: '-0.03em',
+            margin: '0 0 16px', lineHeight: 1.0
+          }}>
+            GLORY
+          </h1>
+          <p style={{
+            fontSize: 'clamp(14px, 2.5vw, 20px)',
+            fontWeight: 300, letterSpacing: '0.15em',
+            textTransform: 'uppercase', margin: '0 0 32px',
+            maxWidth: 600, lineHeight: 1.6
+          }}>
+            Curated Fashion for the Discerning Taste
+          </p>
+          <Link
+            href="/shop"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 10,
+              fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase',
+              fontWeight: 700, textDecoration: 'none',
+              color: '#fff', background: 'rgba(255,255,255,0.15)',
+              padding: '14px 32px', backdropFilter: 'blur(4px)',
+              border: '1px solid rgba(255,255,255,0.3)',
+              transition: 'all 0.3s ease',
+            }}
+            className="hero-cta"
+          >
+            Explore Collection
+            <span>→</span>
           </Link>
-
-          {/* Info side */}
-          <div className="hero-copy" style={{ background: 'var(--color-bg)', padding: '44px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxSizing: 'border-box', height: '100%' }}>
-            {/* Top */}
-            <div>
-              <p style={{ fontSize: 10, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#6B6B6B', margin: '0 0 24px' }}>
-                SS25{hero.collection ? ` · ${hero.collection}` : ''}
-              </p>
-              <h1 style={{ fontSize: 'clamp(24px, 3vw, 42px)', fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.025em', margin: '0 0 16px' }}>
-                {hero.name}
-              </h1>
-              {hero.description && (
-                <p style={{ fontSize: 12, color: '#6B6B6B', lineHeight: 1.7, maxWidth: 300, margin: '0 0 20px' }}>
-                  {hero.description.length > 110 ? hero.description.slice(0, 110) + '…' : hero.description}
-                </p>
-              )}
-              <p style={{ fontSize: 20, fontWeight: 700, letterSpacing: '-0.01em', margin: 0 }}>
-                {hero.sale > 0
-                  ? <><span style={{ color: '#0A4DCC' }}>${hero.sale}</span>&nbsp;<span style={{ fontSize: 13, color: '#999', textDecoration: 'line-through', fontWeight: 400 }}>${hero.price}</span></>
-                  : `$${hero.price}`}
-              </p>
-            </div>
-
-            {/* Bottom */}
-            <div>
-              {hero.variations?.length > 0 && (
-                <div style={{ display: 'flex', gap: 7, marginBottom: 22, flexWrap: 'wrap' }}>
-                  {hero.variations.slice(0, 8).map(v => (
-                    <span key={v.color} title={v.name} style={{ width: 16, height: 16, borderRadius: '50%', background: v.color, border: '1.5px solid rgba(0,0,0,0.12)', flexShrink: 0 }} />
-                  ))}
-                  {hero.variations.length > 8 && <span style={{ fontSize: 10, color: '#6B6B6B', alignSelf: 'center' }}>+{hero.variations.length - 8}</span>}
-                </div>
-              )}
-              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-                <Link
-                  href={`/product/${hero._id}`}
-                  className="btn-primary"
-                  style={{ textDecoration: 'none' }}
-                >
-                  View Product
-                </Link>
-                <Link
-                  href={hero.collection ? `/shop?collection=${encodeURIComponent(hero.collection)}` : '/shop'}
-                  className="btn-outline"
-                  style={{ textDecoration: 'none' }}
-                >
-                  {hero.collection ? `Shop ${hero.collection}` : 'See All Products'}
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
+
+        <style>{`
+          .hero-cta:hover {
+            background: rgba(255,255,255,0.25) !important;
+            border-color: rgba(255,255,255,0.5) !important;
+          }
+          @media (max-width: 768px) {
+            .hero-cta {
+              padding: 12px 24px !important;
+              font-size: 10px !important;
+            }
+          }
+        `}</style>
       </section>
 
       {/* ══════════════════════════════════════
@@ -266,6 +262,8 @@ export default function HomePage() {
           )}
         </section>
       )}
+
+
 
       {/* ══════════════════════════════════════
           PRODUCTS GRID — with "See All" CTA
@@ -326,6 +324,8 @@ export default function HomePage() {
         .cc:hover .cc-img             { transform: scale(1.06) !important; }
         .cc:hover .cc-btn             { background: rgba(255,255,255,0.18) !important; border-color: #fff !important; }
         .see-all-btn:hover            { background: #0A4DCC !important; }
+        
+
         @media (max-width: 768px) {
           .footer-logo { height: 64px !important; }
           .home-section { padding-left: 16px !important; padding-right: 16px !important; }

@@ -46,7 +46,7 @@ export default function ProductCard({ product }: { product: Product }) {
               <span style={{ fontSize: 12, color: '#6B6B6B', textDecoration: 'line-through' }}>${product.price}</span>
             </>
           ) : (
-            <span style={{ fontSize: 13 }}>${product.price}</span>
+            <span style={{ fontSize: 13 }}>${price}</span>
           )}
         </div>
       </div>
