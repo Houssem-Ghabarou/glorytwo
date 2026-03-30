@@ -217,7 +217,7 @@ export default function CheckoutPage() {
                       <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1rem', fontWeight: 400 }}>{item.name}</p>
                       <p style={{ fontSize: 11, color: '#7a7468', marginTop: 2 }}>{item.colorName} · {item.size} · Qty {item.quantity}</p>
                     </div>
-                    <span style={{ fontSize: 13, fontWeight: 600 }}>${(item.price * item.quantity).toFixed(2)}</span>
+                    <span style={{ fontSize: 13, fontWeight: 600 }}>{(item.price * item.quantity).toFixed(3)} TND</span>
                   </div>
                 ))}
               </div>
@@ -260,7 +260,7 @@ export default function CheckoutPage() {
                 <div style={{ flex: 1 }}>
                   <p style={{ fontSize: 12, fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{item.name}</p>
                   <p style={{ fontSize: 10, color: '#7a7468', marginTop: 2 }}>{item.colorName} · {item.size}</p>
-                  <p style={{ fontSize: 12, fontWeight: 600, marginTop: 4 }}>${(item.price * item.quantity).toFixed(2)}</p>
+                  <p style={{ fontSize: 12, fontWeight: 600, marginTop: 4 }}>{(item.price * item.quantity).toFixed(3)} TND</p>
                 </div>
               </div>
             ))}
@@ -269,15 +269,15 @@ export default function CheckoutPage() {
           <div style={{ borderTop: '1px solid #e0d8cc', paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ fontSize: 12, color: '#7a7468' }}>Subtotal</span>
-              <span style={{ fontSize: 12 }}>${total.toFixed(2)}</span>
+              <span style={{ fontSize: 12 }}>{total.toFixed(3)} TND</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ fontSize: 12, color: '#7a7468' }}>Shipping</span>
-              <span style={{ fontSize: 12 }}>${shipping.toFixed(2)}</span>
+              <span style={{ fontSize: 12 }}>{shipping.toFixed(3)} TND</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 8, paddingTop: 12, borderTop: '1px solid #e0d8cc' }}>
               <span style={{ fontSize: 14, fontWeight: 700 }}>Total</span>
-              <span style={{ fontSize: 14, fontWeight: 700 }}>${grandTotal.toFixed(2)}</span>
+              <span style={{ fontSize: 14, fontWeight: 700 }}>{grandTotal.toFixed(3)} TND</span>
             </div>
           </div>
         </div>

@@ -159,11 +159,11 @@ export default function ProductDetails({ product }: { product: Product }) {
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 28 }}>
             {product.sale > 0 ? (
               <>
-                <span style={{ fontSize: 22, fontWeight: 500, color: '#1a1a18' }}>${product.sale}</span>
-                <span style={{ fontSize: 16, color: '#7a7468', textDecoration: 'line-through' }}>${product.price}</span>
+                <span style={{ fontSize: 22, fontWeight: 500, color: '#1a1a18' }}>{product.sale.toFixed(3)} TND</span>
+                <span style={{ fontSize: 16, color: '#7a7468', textDecoration: 'line-through' }}>{product.price.toFixed(3)} TND</span>
               </>
             ) : (
-              <span style={{ fontSize: 22, fontWeight: 500 }}>${product.price}</span>
+              <span style={{ fontSize: 22, fontWeight: 500 }}>{product.price.toFixed(3)} TND</span>
             )}
           </div>
 

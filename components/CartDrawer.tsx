@@ -92,7 +92,7 @@ export default function CartDrawer() {
                       {item.colorName} · {item.size}
                     </p>
                     <p style={{ fontSize: 13, fontWeight: 600, marginBottom: 10 }}>
-                      ${(item.price * item.quantity).toFixed(2)}
+                      {(item.price * item.quantity).toFixed(3)} TND
                     </p>
 
                     {/* Qty control */}
@@ -133,7 +133,7 @@ export default function CartDrawer() {
           <div style={{ borderTop: '1px solid #e0d8cc', padding: 24 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
               <span style={{ fontSize: 12, color: '#7a7468', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Subtotal</span>
-              <span style={{ fontSize: 15, fontWeight: 700 }}>${total.toFixed(2)}</span>
+              <span style={{ fontSize: 15, fontWeight: 700 }}>{total.toFixed(3)} TND</span>
             </div>
             <p style={{ fontSize: 11, color: '#7a7468', marginBottom: 18 }}>Shipping calculated at checkout</p>
             <Link

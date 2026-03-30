@@ -46,11 +46,11 @@ export default function ProductCard({ product }: { product: Product }) {
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
           {isOnSale ? (
             <>
-              <span style={{ fontSize: '0.92rem', fontWeight: 500, color: '#1a1a18' }}>${product.sale}</span>
-              <span style={{ fontSize: '0.8rem', color: '#7a7468', textDecoration: 'line-through' }}>${product.price}</span>
+              <span style={{ fontSize: '0.92rem', fontWeight: 500, color: '#1a1a18' }}>{product.sale.toFixed(3)} TND</span>
+              <span style={{ fontSize: '0.8rem', color: '#7a7468', textDecoration: 'line-through' }}>{product.price.toFixed(3)} TND</span>
             </>
           ) : (
-            <span style={{ fontSize: '0.92rem', fontWeight: 500 }}>${price}</span>
+            <span style={{ fontSize: '0.92rem', fontWeight: 500 }}>{price.toFixed(3)} TND</span>
           )}
         </div>
       </div>

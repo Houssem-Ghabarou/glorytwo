@@ -38,7 +38,7 @@ export default function AdminPage() {
     { label: 'Products', value: products.length, icon: Package, color: '#0A4DCC' },
     { label: 'Total Orders', value: orders.length, icon: ShoppingBag, color: '#276749' },
     { label: 'Pending', value: pending, icon: Clock, color: '#B45309' },
-    { label: 'Revenue', value: `$${revenue.toFixed(0)}`, icon: TrendingUp, color: '#553C9A' },
+    { label: 'Revenue', value: `${revenue.toFixed(3)} TND`, icon: TrendingUp, color: '#553C9A' },
   ]
 
   return (

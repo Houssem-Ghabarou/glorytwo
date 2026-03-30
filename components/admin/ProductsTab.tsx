@@ -103,8 +103,8 @@ export default function ProductsTab({ products, token, onRefresh }: Props) {
 
                 {/* Price */}
                 <div>
-                  <p style={{ fontSize: 13, fontWeight: 600 }}>${price}</p>
-                  {p.sale > 0 && <p style={{ fontSize: 10, color: '#6B6B6B', textDecoration: 'line-through' }}>${p.price}</p>}
+                  <p style={{ fontSize: 13, fontWeight: 600 }}>{price.toFixed(3)} TND</p>
+                  {p.sale > 0 && <p style={{ fontSize: 10, color: '#6B6B6B', textDecoration: 'line-through' }}>{p.price.toFixed(3)} TND</p>}
                 </div>
 
                 {/* Stock */}

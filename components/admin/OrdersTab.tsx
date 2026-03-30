@@ -118,7 +118,7 @@ export default function OrdersTab({ orders, token, onRefresh }: Props) {
                   <p style={{ fontSize: 12, color: '#6B6B6B' }}>{order.items?.length ?? 0} item{order.items?.length !== 1 ? 's' : ''}</p>
 
                   {/* Total */}
-                  <p style={{ fontSize: 13, fontWeight: 600 }}>${order.total?.toFixed(2)}</p>
+                  <p style={{ fontSize: 13, fontWeight: 600 }}>{order.total?.toFixed(3)} TND</p>
 
                   {/* Status badge */}
                   <span style={{ fontSize: 10, letterSpacing: '0.05em', padding: '3px 8px', background: st.bg, color: st.color, border: `1px solid ${st.border}`, display: 'inline-block', whiteSpace: 'nowrap' }}>
@@ -192,7 +192,7 @@ export default function OrdersTab({ orders, token, onRefresh }: Props) {
                             </div>
                             {prod && (
                               <p style={{ fontSize: 12, fontWeight: 600 }}>
-                                ${((prod.sale > 0 ? prod.sale : prod.price) * item.quantity).toFixed(2)}
+                                {((prod.sale > 0 ? prod.sale : prod.price) * item.quantity).toFixed(3)} TND
                               </p>
                             )}
                           </div>
